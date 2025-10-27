@@ -3,17 +3,6 @@ const rightDecoration = document.getElementById('right-decoration');
 
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
-    // Create svg overlay (full page)
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    pathEl.setAttribute('fill', 'none');
-    pathEl.setAttribute('stroke', 'rgba(0,0,0,0.5)');
-    pathEl.setAttribute('stroke-width', '5');
-    pathEl.setAttribute('stroke-linecap', 'round');
-    pathEl.setAttribute('stroke-linejoin', 'round');
-    svg.appendChild(pathEl);
-    document.body.appendChild(svg);
-
     // Create an animated sine stroke inside a decoration element
     function createAnimatedDecoration(el, opts = {}) {
         if (!el) return null;
@@ -22,8 +11,8 @@ const rightDecoration = document.getElementById('right-decoration');
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decPath.setAttribute('fill', 'none');
-        decPath.setAttribute('stroke', opts.stroke || 'rgba(0,0,0,0.5)');
-        decPath.setAttribute('stroke-width', opts.strokeWidth || '5');
+        decPath.setAttribute('stroke', opts.stroke);
+        decPath.setAttribute('stroke-width', '5');
         decPath.setAttribute('stroke-linecap', 'round');
         decPath.setAttribute('stroke-linejoin', 'round');
         decSvg.appendChild(decPath);
@@ -46,13 +35,13 @@ const rightDecoration = document.getElementById('right-decoration');
 
             // Build the path down the element height (top-to-bottom)
             let d = `M ${w / 2 + amplitude * Math.sin(phase)} 0`;
-            for (let i = h / segments; i <= h; i += h / segments)
-                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * (opts.cycles || 1) * i + phase)} ${i * h}`;
+            for (let i = 1 / segments; i <= 1; i += 1 / segments)
+                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * opts.cycles * i + phase)} ${i * h}`;
 
             decPath.setAttribute('d', d);
 
             // phase motion for animation
-            phase += opts.speed || 0.06;
+            phase += Math.random() / 10;
 
             // Schedule next frame
             rafId = requestAnimationFrame(draw);
@@ -67,8 +56,8 @@ const rightDecoration = document.getElementById('right-decoration');
 
     // Create animated decorations for left/right
     const animHandles = [
-        createAnimatedDecoration(leftDecoration, { stroke: 'purple', cycles: Math.random(), speed: Math.random() / 10 }),
-        createAnimatedDecoration(rightDecoration, { stroke: 'orange', cycles: Math.random(), speed: Math.random() / 10 })
+        createAnimatedDecoration(leftDecoration, { stroke: 'purple', cycles: Math.random() }),
+        createAnimatedDecoration(rightDecoration, { stroke: 'orange', cycles: Math.random() })
     ];
 
     // Stop animations on unload to avoid dangling RAFs
