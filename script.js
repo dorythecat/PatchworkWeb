@@ -31,15 +31,14 @@ const rightDecoration = document.getElementById('right-decoration');
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
             // For vertical waves, amplitude should fit within element width
-            const amplitude = Math.min(w2 - 4, Math.min(24, w * 0.45));
-            const segments = Math.max(40, Math.floor(h / 2));
+            const amp = Math.min(w2 - 4, Math.min(24, w2));
+            const seg = Math.max(40, Math.floor(h / 2));
+            const mul = 2 * Math.PI * opts.cycles;
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
-            const mul = 2 * Math.PI * opts.cycles;
-            for (let i = 0; i <= 1; i += 1 / segments)
-                d += (i === 0 ? 'M' : 'L') + `${w2 + amplitude * Math.sin(mul * i + phase)} ${i * h}`;
-
+            for (let i = 0; i <= 1; i += 1 / seg)
+                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(mul * i + phase)} ${i * h}`;
             decPath.setAttribute('d', d);
 
             // phase motion for animation
