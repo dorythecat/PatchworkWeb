@@ -89,7 +89,7 @@ footer {
     color: white;
 }
 
-#showcase {
+.showcase {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -100,7 +100,14 @@ footer {
     text-align: left;
 }
 
-#showcase div {
+.showcase h1 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.showcase div {
     background: linear-gradient(#fff, #aaa);
     color: #333;
     margin-bottom: 15px;
@@ -111,7 +118,7 @@ footer {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-#showcase div:hover {
+.showcase div:hover {
     transform: translateY(-20px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
