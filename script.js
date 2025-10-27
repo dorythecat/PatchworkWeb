@@ -18,7 +18,8 @@ const rightDecoration = document.getElementById('right-decoration');
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        let phase = Math.random() * Math.PI * 2;
+        const cyc = 2 * Math.PI * opts.cycles;
+        let phase = 2 * Math.PI * Math.random();
         let rafId = null;
 
         function draw() {
@@ -33,12 +34,11 @@ const rightDecoration = document.getElementById('right-decoration');
             // For vertical waves, amplitude should fit within element width
             const amp = Math.min(w2 - 4, Math.min(24, w2));
             const seg = Math.max(40, Math.floor(h / 2));
-            const mul = 2 * Math.PI * opts.cycles;
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
             for (let i = 0; i <= 1; i += 1 / seg)
-                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(mul * i + phase)} ${i * h}`;
+                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(cyc * i + phase)} ${i * h}`;
             decPath.setAttribute('d', d);
 
             // phase motion for animation
@@ -67,8 +67,7 @@ const rightDecoration = document.getElementById('right-decoration');
     });
 })();
 
-const showcases = document.querySelectorAll('.showcase');
-showcases.forEach(showcase => {
+document.querySelectorAll('.showcase').forEach(showcase => {
     for (let i = 0; i < showcase.children.length; i++) showcase.children[i].classList.add('reveal', 'visible');
 });
 
