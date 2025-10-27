@@ -76,7 +76,7 @@ showcases.forEach(showcase => {
 function handleScrollReveal() {
     const reveals = document.querySelectorAll('.reveal');
     const windowHeight = window.innerHeight;
-    const revealPoint = 100; // px before element enters viewport
+    const revealPoint = 50; // px before element enters viewport
 
     reveals.forEach(reveal => {
         const elementTop = reveal.getBoundingClientRect().top;
