@@ -13,13 +13,12 @@ body {
 }
 
 #header h1 {
-    margin: 0;
     color: lightyellow;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     background: linear-gradient(90deg, #ff7e5f, #feb47b);
     display: inline-block;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 50px;
 }
 
 .header-container nav ul {
@@ -36,12 +35,13 @@ body {
     background: purple;
     padding: 10px;
     border-radius: 5px;
-    transition: background-color 0.4s, transform 0.4s;
+    transition: background-color 0.4s, transform 0.4s, text-shadow 0.2s;
 }
 
 .header-container nav ul li:hover {
     background: darkmagenta;
     cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transform: scale(1.1);
 }
 
