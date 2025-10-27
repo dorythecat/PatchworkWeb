@@ -2,13 +2,13 @@ const leftDecoration = document.getElementById('left-decoration');
 const rightDecoration = document.getElementById('right-decoration');
 
 // Return the y position of a sine wave at x (pixels) across totalWidth
-function sineY(x, totalWidth, amplitude, cycles, phase = 0, offsetY = 0) {
+function sineY(x, totalWidth, amplitude, cycles, phase, offsetY) {
     const t = x / totalWidth; // 0..1
     return amplitude * Math.sin(2 * Math.PI * cycles * t + phase) + offsetY;
 }
 
 // Create an array of points along a sine wave across the given width
-function sinePathPoints(totalWidth, segments = 200, amplitude = 80, cycles = 2, phase = 0, offsetY = 0) {
+function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY) {
     const path = [];
     for (let i = 0; i <= segments; i++) {
         const x = (i / segments) * totalWidth;
@@ -19,8 +19,6 @@ function sinePathPoints(totalWidth, segments = 200, amplitude = 80, cycles = 2, 
 
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
-    if (!leftDecoration && !rightDecoration) return; // nothing to do
-
     // Create svg overlay (full page)
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -109,9 +107,8 @@ function sinePathPoints(totalWidth, segments = 200, amplitude = 80, cycles = 2, 
         const points = sinePathPoints(width, Math.max(200, Math.floor(width / 4)), amplitude, cycles, 0, offsetY);
 
         // Build path d attribute (use straight lines between samples)
-        let d = '';
-        for (let i = 0; i < points.length; i++)
-            d += (i === 0 ? 'M' : 'L') + `${points[i].x.toFixed(1)} ${points[i].y.toFixed(1)}`;
+        let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+        points.slice(1).forEach(point => d += `L ${point.x.toFixed(1)} ${point.y.toFixed(1)}`);
         pathEl.setAttribute('d', d);
     }
 
@@ -123,10 +120,7 @@ function sinePathPoints(totalWidth, segments = 200, amplitude = 80, cycles = 2, 
 
 const showcases = document.querySelectorAll('.showcase');
 showcases.forEach(showcase => {
-    for (let i = 0; i < showcase.children.length; i++) {
-        const child = showcase.children[i];
-        child.classList.add('reveal');
-    }
+    for (let i = 0; i < showcase.children.length; i++) showcase.children[i].classList.add('reveal', 'visible');
 });
 
 // Simple scroll reveal effect
