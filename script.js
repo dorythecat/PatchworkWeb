@@ -120,3 +120,29 @@ function sinePathPoints(totalWidth, segments = 200, amplitude = 80, cycles = 2, 
         animHandles.forEach(h => { if (h && typeof h.stop === 'function') h.stop(); });
     });
 })();
+
+const showcases = document.querySelectorAll('.showcase');
+showcases.forEach(showcase => {
+    for (let i = 0; i < showcase.children.length; i++) {
+        const child = showcase.children[i];
+        child.classList.add('reveal');
+    }
+});
+
+// Simple scroll reveal effect
+function handleScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    const windowHeight = window.innerHeight;
+    const revealPoint = 100; // px before element enters viewport
+
+    reveals.forEach(reveal => {
+        const elementTop = reveal.getBoundingClientRect().top;
+        const elementBottom = reveal.getBoundingClientRect().bottom;
+
+        if (elementTop < windowHeight - revealPoint && elementBottom > revealPoint) reveal.classList.add('visible');
+        else reveal.classList.remove('visible');
+    });
+}
+
+window.addEventListener('scroll', handleScrollReveal);
+window.addEventListener('load', handleScrollReveal);

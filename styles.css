@@ -122,3 +122,28 @@ footer {
     transform: translateY(-20px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+
+/* Reveal-on-scroll styles */
+.reveal {
+    transform: translateY(64px) scale(0);
+    transition: transform 0.5s;
+    will-change: transform;
+}
+
+.reveal.visible {
+    transform: translateY(0) scale(1);
+}
+
+/* Slight stagger for children of showcase to make scrolling feel nicer */
+.showcase .reveal {
+    transition-delay: 0ms;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.visible {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
