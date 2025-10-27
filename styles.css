@@ -15,14 +15,24 @@ footer {
     bottom: 0;
     width: 100%;
     text-align: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.4s, box-shadow 0.4s, transform 0.4s;
 }
 
-footer:hover {
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.7);
-    cursor: pointer;
-    transform: scale(2) translateY(-10px);
+#left-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    z-index: -1;
+}
+
+#right-decoration {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    z-index: -1;
 }
 
 #header {
