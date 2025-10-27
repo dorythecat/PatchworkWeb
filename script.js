@@ -47,7 +47,7 @@ function sineY(x, totalWidth, amplitude, cycles, phase, offsetY) {
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
             // For vertical waves, amplitude should fit within element width
-            const amplitude = Math.min((w / 2) - 4, opts.maxAmplitude || Math.min(24, w * 0.45));
+            const amplitude = Math.min((w / 2) - 4, Math.min(24, w * 0.45));
             const cycles = opts.cycles || 1;
             const segments = Math.max(40, Math.floor(h / 2));
 
