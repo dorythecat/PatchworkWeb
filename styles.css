@@ -17,23 +17,17 @@ footer {
     text-align: center;
 }
 
-#left-decoration {
+#left-decoration,
+#right-decoration {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100px;
     height: 100%;
     z-index: -1;
 }
 
-#right-decoration {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 100%;
-    z-index: -1;
-}
+#left-decoration { left: 0; }
+#right-decoration { right: 0; }
 
 #header {
     font-size: 24px;

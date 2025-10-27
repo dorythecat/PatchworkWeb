@@ -34,8 +34,6 @@ function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY)
     function createAnimatedDecoration(el, opts = {}) {
         if (!el) return null;
         // Ensure the element can contain positioned children
-        el.style.position = el.style.position || 'fixed';
-        el.style.overflow = 'visible';
 
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -84,30 +82,10 @@ function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY)
     }
 
     // Create animated decorations for left/right
-    const animHandles = [];
-    const leftAnim = createAnimatedDecoration(leftDecoration,
-        { stroke: 'purple', cycles: Math.random(), speed: Math.random() / 10 });
-    const rightAnim = createAnimatedDecoration(rightDecoration,
-        { stroke: 'orange', cycles: Math.random(), speed: Math.random() / 10 });
-    animHandles.push(leftAnim);
-    animHandles.push(rightAnim);
-
-    function update() {
-        const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        const height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
-        // Wave parameters - tuned to cover decorations on both sides
-        const amplitude = Math.min(120, Math.max(40, height * 0.12));
-        const cycles = 1; // how many full waves across the width
-        const offsetY = height * 0.5; // vertical center of the wave
-
-        const points = sinePathPoints(width, Math.max(200, Math.floor(width / 4)), amplitude, cycles, 0, offsetY);
-
-        // Build path d attribute (use straight lines between samples)
-        let d = `M ${points[0].x} ${points[0].y}`;
-        points.slice(1).forEach(point => d += `L ${point.x} ${point.y}`);
-        pathEl.setAttribute('d', d);
-    }
+    const animHandles = [
+        createAnimatedDecoration(leftDecoration, { stroke: 'purple', cycles: Math.random(), speed: Math.random() / 10 }),
+        createAnimatedDecoration(rightDecoration, { stroke: 'orange', cycles: Math.random(), speed: Math.random() / 10 })
+    ];
 
     // Stop animations on unload to avoid dangling RAFs
     window.addEventListener('beforeunload', () => {
