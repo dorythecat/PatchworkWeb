@@ -27,14 +27,14 @@ body {
     justify-content: center;
     background: linear-gradient(90deg, #6a11cb, #2575fc);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .header-container nav ul li {
     display: inline;
     background: purple;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: background-color 0.4s, transform 0.4s, text-shadow 0.2s;
 }
 
@@ -48,4 +48,31 @@ body {
 .header-container nav ul li a {
     text-decoration: none;
     color: white;
+}
+
+#showcase {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: left;
+}
+
+#showcase div {
+    background: linear-gradient(#fff, #aaa);
+    color: #333;
+    margin-bottom: 15px;
+    padding: 15px;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#showcase div:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
