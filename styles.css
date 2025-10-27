@@ -25,9 +25,6 @@ body {
     display: flex;
     gap: 20px;
     justify-content: center;
-    background: linear-gradient(90deg, #6a11cb, #2575fc);
-    padding: 10px;
-    border-radius: 20px;
 }
 
 .header-container nav ul li {
