@@ -64,12 +64,9 @@ function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY)
             const segments = Math.max(40, Math.floor(h / 2));
 
             // Build the path down the element height (top-to-bottom)
-            let d = '';
-            for (let i = 0; i <= segments; i++) {
-                const y = i * h / segments;
-                const x = w / 2 + amplitude * Math.sin(2 * Math.PI * cycles * y / h + phase);
-                d += (i === 0 ? 'M' : 'L') + `${x.toFixed(1)} ${y.toFixed(1)}`;
-            }
+            let d = `M ${w / 2 + amplitude * Math.sin(phase)} 0`;
+            for (let i = h / segments; i <= h; i += h / segments)
+                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * cycles * i + phase)} ${i * h}`;
 
             decPath.setAttribute('d', d);
 
@@ -107,8 +104,8 @@ function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY)
         const points = sinePathPoints(width, Math.max(200, Math.floor(width / 4)), amplitude, cycles, 0, offsetY);
 
         // Build path d attribute (use straight lines between samples)
-        let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
-        points.slice(1).forEach(point => d += `L ${point.x.toFixed(1)} ${point.y.toFixed(1)}`);
+        let d = `M ${points[0].x} ${points[0].y}`;
+        points.slice(1).forEach(point => d += `L ${point.x} ${point.y}`);
         pathEl.setAttribute('d', d);
     }
 
