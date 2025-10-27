@@ -2,20 +2,27 @@ body {
     text-align: center;
     user-select: none;
     margin: 0;
-    background: radial-gradient(circle, #ffecd2, #fcb69f);
+    background: linear-gradient(90deg, orange, purple);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #header {
     font-size: 24px;
-    margin: 0;
     padding: 10px;
     font-weight: bold;
 }
 
-.header-container nav ul {
-    list-style-type: none;
+#header h1 {
     margin: 0;
+    color: lightyellow;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.header-container nav ul {
     display: flex;
     gap: 20px;
     justify-content: center;
