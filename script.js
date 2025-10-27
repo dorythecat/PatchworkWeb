@@ -7,16 +7,6 @@ function sineY(x, totalWidth, amplitude, cycles, phase, offsetY) {
     return amplitude * Math.sin(2 * Math.PI * cycles * t + phase) + offsetY;
 }
 
-// Create an array of points along a sine wave across the given width
-function sinePathPoints(totalWidth, segments, amplitude, cycles, phase, offsetY) {
-    const path = [];
-    for (let i = 0; i <= segments; i++) {
-        const x = (i / segments) * totalWidth;
-        const y = sineY(x, totalWidth, amplitude, cycles, phase, offsetY);
-        path.push({ x, y });
-    } return path;
-}
-
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
     // Create svg overlay (full page)
