@@ -24,19 +24,21 @@ const rightDecoration = document.getElementById('right-decoration');
         function draw() {
             const rect = el.getBoundingClientRect();
             const w = Math.max(40, rect.width || 120);
+            const w2 = w / 2;
             const h = Math.max(24, rect.height || 80);
 
             // keep svg coordinate system in element size
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
             // For vertical waves, amplitude should fit within element width
-            const amplitude = Math.min((w / 2) - 4, Math.min(24, w * 0.45));
+            const amplitude = Math.min(w2 - 4, Math.min(24, w * 0.45));
             const segments = Math.max(40, Math.floor(h / 2));
 
             // Build the path down the element height (top-to-bottom)
-            let d = `M ${w / 2 + amplitude * Math.sin(phase)} 0`;
-            for (let i = 1 / segments; i <= 1; i += 1 / segments)
-                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * opts.cycles * i + phase)} ${i * h}`;
+            let d = '';
+            const mul = 2 * Math.PI * opts.cycles;
+            for (let i = 0; i <= 1; i += 1 / segments)
+                d += (i === 0 ? 'M' : 'L') + `${w2 + amplitude * Math.sin(mul * i + phase)} ${i * h}`;
 
             decPath.setAttribute('d', d);
 
