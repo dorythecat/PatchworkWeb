@@ -1,12 +1,6 @@
 const leftDecoration = document.getElementById('left-decoration');
 const rightDecoration = document.getElementById('right-decoration');
 
-// Return the y position of a sine wave at x (pixels) across totalWidth
-function sineY(x, totalWidth, amplitude, cycles, phase, offsetY) {
-    const t = x / totalWidth; // 0..1
-    return amplitude * Math.sin(2 * Math.PI * cycles * t + phase) + offsetY;
-}
-
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
     // Create svg overlay (full page)
@@ -48,19 +42,19 @@ function sineY(x, totalWidth, amplitude, cycles, phase, offsetY) {
 
             // For vertical waves, amplitude should fit within element width
             const amplitude = Math.min((w / 2) - 4, Math.min(24, w * 0.45));
-            const cycles = opts.cycles || 1;
             const segments = Math.max(40, Math.floor(h / 2));
 
             // Build the path down the element height (top-to-bottom)
             let d = `M ${w / 2 + amplitude * Math.sin(phase)} 0`;
             for (let i = h / segments; i <= h; i += h / segments)
-                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * cycles * i + phase)} ${i * h}`;
+                d += `L ${w / 2 + amplitude * Math.sin(2 * Math.PI * (opts.cycles || 1) * i + phase)} ${i * h}`;
 
             decPath.setAttribute('d', d);
 
             // phase motion for animation
-            phase += (opts.speed || 0.06);
+            phase += opts.speed || 0.06;
 
+            // Schedule next frame
             rafId = requestAnimationFrame(draw);
         }
 
