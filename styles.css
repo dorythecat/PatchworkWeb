@@ -1,14 +1,14 @@
 body {
+    margin: 0;
     text-align: center;
     user-select: none;
-    margin: 0;
     background: linear-gradient(90deg, orange, purple);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #header {
     font-size: 24px;
-    padding: 10px;
+    padding: 12px;
     font-weight: bold;
 }
 
@@ -48,5 +48,4 @@ body {
 .header-container nav ul li a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
 }
