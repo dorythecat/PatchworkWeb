@@ -12,13 +12,26 @@ body {
     font-weight: bold;
 }
 
-#header h1 {
+#branding {
     color: lightyellow;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     background: linear-gradient(90deg, #ff7e5f, #feb47b);
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    width: fit-content;
     padding: 10px 20px;
     border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#branding img {
+    vertical-align: middle;
+    width: 128px;
+    height: 128px;
+    margin: 10px;
+    border-radius: 32px;
 }
 
 .header-container nav ul {
