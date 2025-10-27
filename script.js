@@ -5,9 +5,6 @@ const rightDecoration = document.getElementById('right-decoration');
 (function initWaveOverlay() {
     // Create an animated sine stroke inside a decoration element
     function createAnimatedDecoration(el, opts = {}) {
-        if (!el) return null;
-        // Ensure the element can contain positioned children
-
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decPath.setAttribute('fill', 'none');
