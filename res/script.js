@@ -27,8 +27,8 @@ const rightDecoration = document.getElementById('right-decoration');
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
             // For vertical waves, amplitude should fit within element width
-            const amp = Math.min(w2 - 4, Math.min(24, w2));
-            const seg = Math.max(40, Math.floor(h / 2));
+            const amp = w2 > 28 ? w2 - 4 : 24;
+            const seg = Math.max(40, h >> 2);
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
