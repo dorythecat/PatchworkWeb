@@ -188,3 +188,11 @@ footer {
         opacity: 1 !important;
     }
 }
+
+@media (max-width: 600px) {
+    .showcase,
+    #branding {
+        flex-direction: column;
+        align-items: center;
+    }
+}
