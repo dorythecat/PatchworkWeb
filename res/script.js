@@ -8,28 +8,22 @@
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        const cyc = Math.random();
         let phase = Math.random();
-        let rafId = null;
-
         function draw() {
-            const rect = el.getBoundingClientRect();
-            const w = Math.max(40, rect.width || 120);
-            const h = Math.max(24, rect.height || 80);
-            decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+            const r = el.getBoundingClientRect();
+            decSvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
 
-            const amp = w > 56 ? w / 2 - 4 : 24;
             let d = '';
-            for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 1))
-                d += (i === 0 ? 'M' : 'L') + `${(w + amp * Math.sin(cyc * i + phase) * i) / 2} ${i * h}`;
+            for (let i = 0; i <= 1; i += 1 / 64)
+                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * Math.sin(9 * i + phase)) / 2} ${i * r.height}`;
             decPath.setAttribute('d', d);
 
             phase += Math.random() / 9;
-            rafId = requestAnimationFrame(draw);
+            return requestAnimationFrame(draw);
         }
 
-        draw();
-        return { stop() { if (rafId) cancelAnimationFrame(rafId); } };
+        const rafId = draw();
+        return { stop() { cancelAnimationFrame(rafId); } };
     }
 
     // Create animated decorations for left/right
@@ -50,11 +44,11 @@ document.querySelectorAll('.showcase').forEach(showcase => {
 
 // Simple scroll reveal effect
 function handleScrollReveal() {
-    const revealPoint = 50; // px before element enters viewport
-    document.querySelectorAll('.reveal').forEach(reveal => {
-        const rect = reveal.getBoundingClientRect();
-        if (rect.top < window.innerHeight - revealPoint && rect.bottom > revealPoint) reveal.classList.add('visible');
-        else reveal.classList.remove('visible');
+    const revDis = 50; // px before element enters viewport
+    document.querySelectorAll('.reveal').forEach(rev => {
+        const rect = rev.getBoundingClientRect();
+        if (window.innerHeight - rect.top > revDis && rect.bottom > revDis) rev.classList.add('visible');
+        else rev.classList.remove('visible');
     });
 }
 
