@@ -205,7 +205,6 @@ footer {
 .reveal {
     transform: translateY(64px) scale(0);
     transition: transform 0.5s;
-    will-change: transform;
 }
 
 .reveal.visible {
@@ -223,7 +222,6 @@ footer {
     .reveal.visible {
         transition: none !important;
         transform: none !important;
-        will-change: none !important;
     }
 }
 
