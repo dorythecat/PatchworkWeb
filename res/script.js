@@ -1,7 +1,3 @@
-const leftDecoration = document.getElementById('left-decoration');
-const rightDecoration = document.getElementById('right-decoration');
-
-// Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
     function createAnimatedDecoration(el, stroke) {
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -38,8 +34,8 @@ const rightDecoration = document.getElementById('right-decoration');
 
     // Create animated decorations for left/right
     const animHandles = [
-        createAnimatedDecoration(leftDecoration, 'purple'),
-        createAnimatedDecoration(rightDecoration, 'orange')
+        createAnimatedDecoration(document.getElementById('left-decoration'), 'purple'),
+        createAnimatedDecoration(document.getElementById('right-decoration'), 'orange')
     ];
 
     // Stop animations on unload to avoid dangling RAFs
@@ -54,15 +50,10 @@ document.querySelectorAll('.showcase').forEach(showcase => {
 
 // Simple scroll reveal effect
 function handleScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    const windowHeight = window.innerHeight;
     const revealPoint = 50; // px before element enters viewport
-
-    reveals.forEach(reveal => {
-        const elementTop = reveal.getBoundingClientRect().top;
-        const elementBottom = reveal.getBoundingClientRect().bottom;
-
-        if (elementTop < windowHeight - revealPoint && elementBottom > revealPoint) reveal.classList.add('visible');
+    document.querySelectorAll('.reveal').forEach(reveal => {
+        const rect = reveal.getBoundingClientRect();
+        if (rect.top < window.innerHeight - revealPoint && rect.bottom > revealPoint) reveal.classList.add('visible');
         else reveal.classList.remove('visible');
     });
 }
