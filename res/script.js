@@ -12,8 +12,8 @@ const rightDecoration = document.getElementById('right-decoration');
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        const cyc = 2 * Math.PI * Math.random();
-        let phase = 2 * Math.PI * Math.random();
+        const cyc = Math.random();
+        let phase = Math.random();
         let rafId = null;
 
         function draw() {
@@ -25,10 +25,10 @@ const rightDecoration = document.getElementById('right-decoration');
             const amp = w > 56 ? w / 2 - 4 : 24;
             let d = '';
             for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 1))
-                d += (i === 0 ? 'M' : 'L') + `${w / 2 + amp * Math.sin(cyc * i + phase) * i} ${i * h}`;
+                d += (i === 0 ? 'M' : 'L') + `${(w + amp * Math.sin(cyc * i + phase) * i) / 2} ${i * h}`;
             decPath.setAttribute('d', d);
 
-            phase += Math.random() / 10;
+            phase += Math.random() / 9;
             rafId = requestAnimationFrame(draw);
         }
 
