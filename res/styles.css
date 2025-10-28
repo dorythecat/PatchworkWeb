@@ -54,6 +54,14 @@ footer {
     padding: 10px 20px;
     border-radius: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s, box-shadow 0.4s, filter 0.4s;
+    filter: blur(4px);
+}
+
+#branding:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    filter: none !important;
 }
 
 #branding img {
@@ -62,6 +70,13 @@ footer {
     height: 128px;
     margin: 10px;
     border-radius: 32px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.4s, transform 0.4s;
+}
+
+#branding img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
 }
 
 .header-container nav ul li {
@@ -107,14 +122,16 @@ footer {
     padding: 15px;
     max-width: 300px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    filter: blur(4px);
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
 }
 
 .showcase div:hover {
     transform: translateY(-20px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    filter: none !important;
 }
 
 .showcase div:before,
