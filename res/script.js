@@ -20,19 +20,18 @@ const rightDecoration = document.getElementById('right-decoration');
         function draw() {
             const rect = el.getBoundingClientRect();
             const w = Math.max(40, rect.width || 120);
-            const w2 = w / 2;
             const h = Math.max(24, rect.height || 80);
 
             // keep svg coordinate system in element size
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
             // For vertical waves, amplitude should fit within element width
-            const amp = w2 > 28 ? w2 - 4 : 24;
+            const amp = w > 56 ? w / 2 - 4 : 24;
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
             for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 1))
-                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(cyc * i + phase) * i} ${i * h}`;
+                d += (i === 0 ? 'M' : 'L') + `${w / 2 + amp * Math.sin(cyc * i + phase) * i} ${i * h}`;
             decPath.setAttribute('d', d);
 
             // phase motion for animation
