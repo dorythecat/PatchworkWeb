@@ -38,9 +38,9 @@
     });
 })();
 
-document.querySelectorAll('.showcase').forEach(showcase => {
-    for (let i = 0; i < showcase.children.length; i++) showcase.children[i].classList.add('reveal', 'visible');
-});
+document.querySelectorAll('.showcase').forEach(el =>
+    [...el.children].forEach(child => { child.classList.add('reveal', 'visible') })
+);
 
 // Simple scroll reveal effect
 function handleScrollReveal() {
