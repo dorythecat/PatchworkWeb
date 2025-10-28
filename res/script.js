@@ -4,16 +4,16 @@ const rightDecoration = document.getElementById('right-decoration');
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
     // Create an animated sine stroke inside a decoration element
-    function createAnimatedDecoration(el, opts = {}) {
+    function createAnimatedDecoration(el, stroke, cycles) {
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decPath.setAttribute('fill', 'none');
-        decPath.setAttribute('stroke', opts.stroke);
+        decPath.setAttribute('stroke', stroke);
         decPath.setAttribute('stroke-width', '5');
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        const cyc = 2 * Math.PI * opts.cycles;
+        const cyc = 2 * Math.PI * cycles;
         let phase = 2 * Math.PI * Math.random();
         let rafId = null;
 
@@ -51,8 +51,8 @@ const rightDecoration = document.getElementById('right-decoration');
 
     // Create animated decorations for left/right
     const animHandles = [
-        createAnimatedDecoration(leftDecoration, { stroke: 'purple', cycles: Math.random() }),
-        createAnimatedDecoration(rightDecoration, { stroke: 'orange', cycles: Math.random() })
+        createAnimatedDecoration(leftDecoration, 'purple', Math.random()),
+        createAnimatedDecoration(rightDecoration, 'orange', Math.random())
     ];
 
     // Stop animations on unload to avoid dangling RAFs
