@@ -111,6 +111,31 @@ footer {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+.showcase div:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.showcase div:before,
+.showcase div:after {
+    content: "";
+    position: absolute;
+    background: radial-gradient(circle, purple, rgba(128, 0, 128, 0.3));
+    width: 40%;
+    height: 40%;
+    top: 90%;
+    left: 90%;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.showcase div:before {
+    top: 10%;
+    left: 10%;
+    transform: translate(-100%, -100%);
 }
 
 .showcase div h2 {
@@ -141,16 +166,11 @@ footer {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-.showcase div:hover {
-    transform: translateY(-20px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
 .contact {
     margin: 20px auto;
     padding: 20px;
     max-width: 50vw;
-    background: linear-gradient(#fff, #ddd);
+    background: linear-gradient(#fff, #aaa);
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
