@@ -36,13 +36,19 @@ footer {
     font-weight: bold;
 }
 
+#branding,
+.header-container nav ul,
+.showcase {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
 #branding {
     color: lightyellow;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     background: linear-gradient(90deg, #ff7e5f, #feb47b);
-    display: flex;
     align-items: center;
-    justify-content: center;
     margin: 20px auto;
     width: fit-content;
     padding: 10px 20px;
@@ -56,12 +62,6 @@ footer {
     height: 128px;
     margin: 10px;
     border-radius: 32px;
-}
-
-.header-container nav ul {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
 }
 
 .header-container nav ul li {
@@ -85,10 +85,7 @@ footer {
 }
 
 .showcase {
-    display: flex;
     flex-direction: row;
-    gap: 20px;
-    justify-content: center;
     flex-wrap: wrap;
     margin: 20px;
     padding-top: 0;
@@ -208,14 +205,10 @@ footer {
     will-change: transform;
 }
 
-.reveal.visible {
-    transform: translateY(0) scale(1);
-}
+.reveal.visible { transform: translateY(0) scale(1); }
 
 /* Slight stagger for children of showcase to make scrolling feel nicer */
-.showcase .reveal {
-    transition-delay: 0ms;
-}
+.showcase .reveal { transition-delay: 0ms; }
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
