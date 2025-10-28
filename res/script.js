@@ -28,11 +28,10 @@ const rightDecoration = document.getElementById('right-decoration');
 
             // For vertical waves, amplitude should fit within element width
             const amp = w2 > 28 ? w2 - 4 : 24;
-            const seg = Math.max(40, h >> 2);
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
-            for (let i = 0; i <= 1; i += 1 / seg)
+            for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 2))
                 d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(cyc * i + phase)} ${i * h}`;
             decPath.setAttribute('d', d);
 
