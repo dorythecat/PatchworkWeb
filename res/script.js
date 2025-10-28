@@ -3,8 +3,7 @@ const rightDecoration = document.getElementById('right-decoration');
 
 // Ensure decorations and svg overlay are created and updated to cover both sides
 (function initWaveOverlay() {
-    // Create an animated sine stroke inside a decoration element
-    function createAnimatedDecoration(el, stroke, cycles) {
+    function createAnimatedDecoration(el, stroke) {
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decPath.setAttribute('fill', 'none');
@@ -13,7 +12,7 @@ const rightDecoration = document.getElementById('right-decoration');
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        const cyc = 2 * Math.PI * cycles;
+        const cyc = 2 * Math.PI * Math.random();
         let phase = 2 * Math.PI * Math.random();
         let rafId = null;
 
@@ -21,37 +20,26 @@ const rightDecoration = document.getElementById('right-decoration');
             const rect = el.getBoundingClientRect();
             const w = Math.max(40, rect.width || 120);
             const h = Math.max(24, rect.height || 80);
-
-            // keep svg coordinate system in element size
             decSvg.setAttribute('viewBox', `0 0 ${w} ${h}`);
 
-            // For vertical waves, amplitude should fit within element width
             const amp = w > 56 ? w / 2 - 4 : 24;
-
-            // Build the path down the element height (top-to-bottom)
             let d = '';
             for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 1))
                 d += (i === 0 ? 'M' : 'L') + `${w / 2 + amp * Math.sin(cyc * i + phase) * i} ${i * h}`;
             decPath.setAttribute('d', d);
 
-            // phase motion for animation
             phase += Math.random() / 10;
-
-            // Schedule next frame
             rafId = requestAnimationFrame(draw);
         }
 
-        // Start animation
         draw();
-
-        // Return a handle to stop later if needed
         return { stop() { if (rafId) cancelAnimationFrame(rafId); } };
     }
 
     // Create animated decorations for left/right
     const animHandles = [
-        createAnimatedDecoration(leftDecoration, 'purple', Math.random()),
-        createAnimatedDecoration(rightDecoration, 'orange', Math.random())
+        createAnimatedDecoration(leftDecoration, 'purple'),
+        createAnimatedDecoration(rightDecoration, 'orange')
     ];
 
     // Stop animations on unload to avoid dangling RAFs
