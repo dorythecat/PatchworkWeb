@@ -10,8 +10,6 @@ const rightDecoration = document.getElementById('right-decoration');
         decPath.setAttribute('fill', 'none');
         decPath.setAttribute('stroke', opts.stroke);
         decPath.setAttribute('stroke-width', '5');
-        decPath.setAttribute('stroke-linecap', 'round');
-        decPath.setAttribute('stroke-linejoin', 'round');
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
