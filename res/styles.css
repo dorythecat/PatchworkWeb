@@ -69,12 +69,12 @@ footer {
     background: purple;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
     transition: background-color 0.4s, transform 0.4s, text-shadow 0.2s;
 }
 
 .header-container nav ul li:hover {
     background: darkmagenta;
-    cursor: pointer;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transform: scale(1.1);
 }
@@ -192,13 +192,13 @@ footer {
 .contact ul li {
     margin: 10px 0;
     font-size: 18px;
+    cursor: pointer;
     transition: color 0.3s, transform 0.3s;
 }
 
 .contact ul li:hover {
     color: purple;
     transform: scale(1.05);
-    cursor: pointer;
 }
 
 /* Reveal-on-scroll styles */
