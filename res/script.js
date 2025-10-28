@@ -31,8 +31,8 @@ const rightDecoration = document.getElementById('right-decoration');
 
             // Build the path down the element height (top-to-bottom)
             let d = '';
-            for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 2))
-                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(cyc * i + phase)} ${i * h}`;
+            for (let i = 0; i < 1; i += 1 / Math.max(40, h >> 1))
+                d += (i === 0 ? 'M' : 'L') + `${w2 + amp * Math.sin(cyc * i + phase) * i} ${i * h}`;
             decPath.setAttribute('d', d);
 
             // phase motion for animation
