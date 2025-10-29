@@ -394,10 +394,15 @@ td {
     border: none;
     font-size: 72px;
     font-weight: bold;
-    color: linear-gradient(90deg, orange, purple);
     width: 100%;
     text-align: center;
     outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 @keyframes loading {
