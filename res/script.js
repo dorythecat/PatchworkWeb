@@ -1,3 +1,12 @@
+function fastCos(x) {
+    if (x < 0) x = -x;
+    if (x > 2 * Math.PI) x = x % (2 * Math.PI);
+    if (x === 0) return 1;
+    if (x > Math.PI / 2) return -fastCos(Math.PI - x);
+    const x2 = x * x / 2;
+    return 1 - x2 * (1 - x2 / 6);
+}
+
 (function initWaveOverlay() {
     function createAnimatedDecoration(el, stroke) {
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -15,7 +24,7 @@
 
             let d = '';
             for (let i = 0; i <= 1; i += 1 / 64)
-                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * Math.sin(9 * i + phase)) / 2} ${i * r.height}`;
+                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * fastCos(9 * i + phase)) / 2} ${i * r.height}`;
             decPath.setAttribute('d', d);
 
             phase += Math.random() / 9;
