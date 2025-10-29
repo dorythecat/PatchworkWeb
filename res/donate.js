@@ -1,29 +1,24 @@
 const stripe = Stripe('pk_test_51SEYoYDn7zRnsihsxizdby6oTeEaDjqQIUvFJGzsyUmnthmvIGy52tqMkP2mPjv46prUT5NWKHmCR0zRswOpD4kN00yOBEeKZV');
 const donationInput = document.getElementById('donateAmount');
-let donationValue = parseInt(donationInput.value) || 10;
+let donationValue = 0;
 let setPrice = -1;
-donationInput.addEventListener('input', async e => {
-    donationValue = parseInt(e.target.value) || 10;
-    initialize();
-});
-let currency = 'eur';
-let elements;
+let elements = null;
 
 initialize();
-document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
+donationInput.addEventListener('input', initialize);
+document.getElementById("payment-form").addEventListener('submit', handleSubmit);
 
 // Fetches a payment intent and captures the client secret
 function initialize() {
     setLoading(true);
-    fetch("/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ donationValue: donationValue * 10, currency: currency })
+    donationValue = parseInt(donationInput.value) || 10;
+    fetch('/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ donationValue: donationValue * 10, currency: 'eur' })
     }).then(res => res.json()).catch(err => console.log(err)).then(data => {
         const clientSecret = data.clientSecret;
-        const appearance = {
-            theme: 'stripe',
-        };
+        const appearance = { theme: 'stripe' };
         elements = stripe.elements({ appearance, clientSecret });
         setPrice = donationValue;
         const paymentElement = elements.create("payment");
