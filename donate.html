@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="res/styles.css">
     <script src="res/script.js" defer></script>
+    <script src="res/donate.js" defer></script>
     <script src="https://js.stripe.com/clover/stripe.js"></script>
 </head>
 <body>
@@ -28,90 +29,16 @@
         </nav>
     </div>
 </section>
-<!-- Display a payment form -->
+<label for="donateAmount">Amount to donate (€):</label>
+<input type="number" id="donateAmount" value="10"/>
 <form id="payment-form">
-    <div id="payment-element">
-        <!--Stripe.js injects the Payment Element-->
-    </div>
+    <div id="payment-element"></div>
     <button id="submit">
         <div class="spinner hidden" id="spinner"></div>
         <span id="button-text">Pay now</span>
     </button>
     <div id="payment-message" class="hidden"></div>
 </form>
-<script>
-    const stripe = Stripe('pk_test_51SEYoYDn7zRnsihsxizdby6oTeEaDjqQIUvFJGzsyUmnthmvIGy52tqMkP2mPjv46prUT5NWKHmCR0zRswOpD4kN00yOBEeKZV');
-    let donationValue = 10; // TODO: Make the user be able to select how much they want to donate
-    let currency = 'eur';
-    let elements;
-
-    initialize();
-    document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
-
-    // Fetches a payment intent and captures the client secret
-    async function initialize() {
-        const response = await fetch("/create-payment-intent", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ donationValue: donationValue * 10, currency: currency })
-        });
-        const { clientSecret } = await response.json();
-
-        const appearance = { theme: 'stripe' };
-        elements = stripe.elements({ appearance, clientSecret });
-
-        const paymentElement = elements.create("payment", {
-            layout: "accordion"
-        });
-        paymentElement.mount("#payment-element");
-    }
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-        setLoading(true);
-
-        const { error } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                // TODO: Change this to your payment completion page
-                return_url: "https://your-website.com/order/complete",
-            },
-        });
-
-        if (error.type === "card_error" || error.type === "validation_error") showMessage(error.message);
-        else showMessage("An unexpected error occurred.");
-
-        setLoading(false);
-    }
-
-    // ------- UI helpers -------
-
-    function showMessage(messageText) {
-        const messageContainer = document.querySelector("#payment-message");
-
-        messageContainer.classList.remove("hidden");
-        messageContainer.textContent = messageText;
-
-        setTimeout(function () {
-            messageContainer.classList.add("hidden");
-            messageContainer.textContent = "";
-        }, 4000);
-    }
-
-    // Show a spinner on payment submission
-    function setLoading(isLoading) {
-        if (isLoading) {
-            // Disable the button and show a spinner
-            document.querySelector("#submit").disabled = true;
-            document.querySelector("#spinner").classList.remove("hidden");
-            document.querySelector("#button-text").classList.add("hidden");
-            return;
-        }
-        document.querySelector("#submit").disabled = false;
-        document.querySelector("#spinner").classList.add("hidden");
-        document.querySelector("#button-text").classList.remove("hidden");
-    }
-</script>
 </body>
 <footer><p>&copy;2025 PatchWork Labs</p></footer>
 </html>

@@ -224,24 +224,6 @@ footer {
 /* Slight stagger for children of showcase to make scrolling feel nicer */
 .showcase .reveal { transition-delay: 0ms; }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    .reveal,
-    .reveal.visible {
-        transition: none !important;
-        transform: none !important;
-        will-change: none !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .showcase,
-    #branding {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 form {
     width: 30vw;
     min-width: 500px;
@@ -407,16 +389,45 @@ td {
     width: 100%;
 }
 
+#donateAmount {
+    background: transparent;
+    border: none;
+    font-size: 72px;
+    font-weight: bold;
+    color: linear-gradient(90deg, orange, purple);
+    width: 100%;
+    text-align: center;
+    outline: none;
+}
+
 @keyframes loading {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 @keyframes fadeInAnimation {
     to { opacity: 1; }
 }
 
-@media only screen and (max-width: 600px) {
-    form, #payment-status{
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .reveal.visible {
+        transition: none !important;
+        transform: none !important;
+        will-change: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .showcase,
+    #branding {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    form,
+    #payment-status {
         width: 80vw;
         min-width: initial;
     }
