@@ -39,7 +39,7 @@
 })();
 
 document.querySelectorAll('.showcase').forEach(el =>
-    [...el.children].forEach(child => { child.classList.add('reveal', 'visible') })
+    [...el.children].forEach(child => child.classList.add('reveal', 'visible'))
 );
 
 // Simple scroll reveal effect
