@@ -1,8 +1,6 @@
 function fastCos(x) {
-    if (x < 0) x = -x;
-    if (x > 2 * Math.PI) x = x % (2 * Math.PI);
-    if (x === 0) return 1;
-    if (x > Math.PI / 2) return -fastCos(Math.PI - x);
+    x = Math.abs(x) % (2 * Math.PI);
+    if (2 * x > Math.PI) return -fastCos(x - Math.PI);
     const x2 = x * x / 2;
     return 1 - x2 * (1 - x2 / 6);
 }
