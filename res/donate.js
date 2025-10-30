@@ -19,7 +19,7 @@ function initialize() {
     }).then(res => res.json()).catch(err => console.log(err)).then(data => {
         const clientSecret = data.clientSecret;
         const appearance = { theme: 'stripe' };
-        elements = stripe.elements({ appearance, clinetSecret });
+        elements = stripe.elements({ appearance, clientSecret });
         setPrice = donationValue;
         const paymentElement = elements.create('payment');
         paymentElement.mount('#payment-element');
