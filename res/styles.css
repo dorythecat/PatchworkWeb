@@ -93,14 +93,15 @@ footer a { cursor: not-allowed; }
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.4s, transform 0.4s, text-shadow 0.2s;
+    transition: transform 0.4s, text-shadow 0.2s;
 }
 
 .header-container nav ul li:hover {
-    background: darkmagenta;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     transform: scale(1.1);
 }
+
+.header-container nav ul li#active { background: darkslateblue; }
 
 a {
     text-decoration: none;
