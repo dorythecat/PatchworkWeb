@@ -11,7 +11,7 @@ document.getElementById('payment-form').addEventListener('submit', handleSubmit)
 // Fetches a payment intent and captures the client secret
 function initialize() {
     setLoading(true);
-    donationValue = parseInt(donationInput.value) || 10;
+    donationInput.value = donationValue = parseInt(donationInput.value) || 10;
     fetch('/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ function initialize() {
     }).then(res => res.json()).catch(err => console.log(err)).then(data => {
         const clientSecret = data.clientSecret;
         const appearance = { theme: 'stripe' };
-        elements = stripe.elements({ appearance, clientSecret });
+        elements = stripe.elements({ appearance, clinetSecret });
         setPrice = donationValue;
         const paymentElement = elements.create('payment');
         paymentElement.mount('#payment-element');
@@ -38,8 +38,7 @@ async function handleSubmit(e) {
             return_url: 'https://your-website.com/order/complete',
         },
     });
-    showMessage((error.type in ['card_error', 'validation_error']) ? error.message :
-                                                                                 'An unexpected error occurred.');
+    showMessage(error.type in ['card_error', 'validation_error'] ? error.message : 'An unexpected error occurred.');
     setLoading(false);
 }
 
