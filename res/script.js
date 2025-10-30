@@ -16,13 +16,13 @@ function fastCos(x) {
         el.appendChild(decSvg);
 
         let p = Math.random() * 2 * Math.PI;
-        function draw() {
-            const r = el.getBoundingClientRect();
-            decSvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
+        function draw() { // We assume that the width is 100px and that only height varies
+            const h = el.getBoundingClientRect().height;
+            decSvg.setAttribute('viewBox', `0 0 100 ${h}`);
 
-            let d = '';
-            for (let i = 0; i <= 1; i += 1 / 64)
-                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * fastCos(9 * i + p)) / 2} ${i * r.height}`;
+            const step = 1 / 64; // More steps = smoother wave but more CPU and memory usage
+            let d = `M 50 0`;
+            for (let i = step; i <= 1; i += step) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
             decPath.setAttribute('d', d);
 
             p += 1 / 16;
