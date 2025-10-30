@@ -30,7 +30,7 @@ footer a { cursor: not-allowed; }
 #left-decoration,
 #right-decoration {
     position: fixed;
-    bottom: 0;
+    height: 100%;
     z-index: -1;
 }
 
