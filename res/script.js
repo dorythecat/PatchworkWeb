@@ -15,17 +15,17 @@ function fastCos(x) {
         decSvg.appendChild(decPath);
         el.appendChild(decSvg);
 
-        let phase = Math.random();
+        let p = Math.random() * 2 * Math.PI;
         function draw() {
             const r = el.getBoundingClientRect();
             decSvg.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
 
             let d = '';
             for (let i = 0; i <= 1; i += 1 / 64)
-                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * fastCos(9 * i + phase)) / 2} ${i * r.height}`;
+                d += (i === 0 ? 'M' : 'L') + `${r.width * (1 + i * fastCos(9 * i + p)) / 2} ${i * r.height}`;
             decPath.setAttribute('d', d);
 
-            phase += Math.random() / 9;
+            p += 1 / 16;
             return requestAnimationFrame(draw);
         }
 
@@ -40,9 +40,7 @@ function fastCos(x) {
     ];
 
     // Stop animations on unload to avoid dangling RAFs
-    window.addEventListener('beforeunload', () => {
-        animHandles.forEach(h => { if (h && typeof h.stop === 'function') h.stop(); });
-    });
+    window.addEventListener('beforeunload', () => animHandles.forEach(h => h.stop()));
 })();
 
 document.querySelectorAll('.showcase').forEach(el =>
