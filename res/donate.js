@@ -6,7 +6,7 @@ let elements = null;
 
 initialize();
 donationInput.addEventListener('input', initialize);
-document.getElementById("payment-form").addEventListener('submit', handleSubmit);
+document.getElementById('payment-form').addEventListener('submit', handleSubmit);
 
 // Fetches a payment intent and captures the client secret
 function initialize() {
@@ -21,8 +21,8 @@ function initialize() {
         const appearance = { theme: 'stripe' };
         elements = stripe.elements({ appearance, clientSecret });
         setPrice = donationValue;
-        const paymentElement = elements.create("payment");
-        paymentElement.mount("#payment-element");
+        const paymentElement = elements.create('payment');
+        paymentElement.mount('#payment-element');
         setLoading(false);
     }).catch(err => console.log(err));
 }
@@ -35,32 +35,24 @@ async function handleSubmit(e) {
         elements,
         confirmParams: {
             // TODO: Change this to your payment completion page
-            return_url: "https://your-website.com/order/complete",
+            return_url: 'https://your-website.com/order/complete',
         },
     });
-    showMessage((error.type in ["card_error", "validation_error"]) ? error.message :
-                                                                                 "An unexpected error occurred.");
+    showMessage((error.type in ['card_error', 'validation_error']) ? error.message :
+                                                                                 'An unexpected error occurred.');
     setLoading(false);
 }
 
 // ------- UI helpers -------
 function showMessage(messageText) {
-    const messageContainer = document.querySelector("#payment-message");
+    const messageContainer = document.getElementById('payment-message');
     messageContainer.textContent = messageText;
-    messageContainer.classList.remove("hidden");
-    setTimeout(() => messageContainer.classList.add("hidden"), 5000);
+    messageContainer.classList.remove('hidden');
+    setTimeout(() => messageContainer.classList.add('hidden'), 5000);
 }
 
-// Show a spinner on payment submission
-function setLoading(isLoading) {
-    if (isLoading) {
-        // Disable the button and show a spinner
-        document.querySelector("#submit").disabled = true;
-        document.querySelector("#spinner").classList.remove("hidden");
-        document.querySelector("#button-text").classList.add("hidden");
-        return;
-    }
-    document.querySelector("#submit").disabled = false;
-    document.querySelector("#spinner").classList.add("hidden");
-    document.querySelector("#button-text").classList.remove("hidden");
+function setLoading(isLoading) { // Disable the button and show a spinner if loading
+    document.getElementById('submit').disabled = isLoading;
+    document.getElementById('spinner').classList.toggle('hidden', !isLoading);
+    document.getElementById('button-text').classList.toggle('hidden', isLoading);
 }
