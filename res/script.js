@@ -8,23 +8,24 @@ function fastCos(x) {
 (function initWaveOverlay() {
     function createAnimatedDecoration(el, stroke) {
         el.style.width = "100px"; // Make sure the width is fixed at 100px
-        const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        decPath.setAttribute('fill', 'none');
-        decPath.setAttribute('stroke', stroke);
-        decPath.setAttribute('stroke-width', '5');
-        decSvg.appendChild(decPath);
-        el.appendChild(decSvg);
+        const namespace = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(namespace, 'svg');
+        const path = document.createElementNS(namespace, 'path');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', stroke);
+        path.setAttribute('stroke-width', '5');
+        svg.appendChild(path);
+        el.appendChild(svg);
 
         let p = Math.random() * 2 * Math.PI;
         function draw() {
             const h = el.getBoundingClientRect().height;
-            decSvg.setAttribute('viewBox', `0 0 100 ${h}`);
+            svg.setAttribute('viewBox', `0 0 100 ${h}`);
 
             const s = 1 / 64; // Step size; smaller value means a smoother wave, but more CPU and memory usage
             let d = `M 50 0`;
             for (let i = s; i <= 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
-            decPath.setAttribute('d', d);
+            path.setAttribute('d', d);
 
             p += 1 / 16;
             return requestAnimationFrame(draw);
