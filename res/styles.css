@@ -117,11 +117,11 @@ a {
 }
 
 .showcase h2 {
-    width: 100%;
     font-size: 36px;
-    margin-bottom: 20px;
     text-align: center;
     color: #fff;
+    width: fit-content;
+    margin: 0 40% 20px 40%;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     transition: all 0.3s;
 }
@@ -173,13 +173,13 @@ a {
     color: #333;
     font-size: 24px;
     width: fit-content;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 10px 0;
     text-shadow: 1px 1px 0 #fff;
     background: linear-gradient(90deg, #ffb347, #ffcc33);
-    padding: 8px 10px;
-    border-radius: 8px;
-    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
 }
+.showcase div h2:hover { text-shadow: 2px 2px 4px #fff; }
 
 .showcase div img {
     width: 100%;
