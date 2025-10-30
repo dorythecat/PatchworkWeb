@@ -7,6 +7,7 @@ function fastCos(x) {
 
 (function initWaveOverlay() {
     function createAnimatedDecoration(el, stroke) {
+        el.style.width = "100px"; // Make sure the width is fixed at 100px
         const decSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         const decPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decPath.setAttribute('fill', 'none');
@@ -16,13 +17,13 @@ function fastCos(x) {
         el.appendChild(decSvg);
 
         let p = Math.random() * 2 * Math.PI;
-        function draw() { // We assume that the width is 100px and that only height varies
+        function draw() {
             const h = el.getBoundingClientRect().height;
             decSvg.setAttribute('viewBox', `0 0 100 ${h}`);
 
-            const step = 1 / 64; // More steps = smoother wave but more CPU and memory usage
+            const s = 1 / 64; // Step size; smaller value means a smoother wave, but more CPU and memory usage
             let d = `M 50 0`;
-            for (let i = step; i <= 1; i += step) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
+            for (let i = s; i <= 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
             decPath.setAttribute('d', d);
 
             p += 1 / 16;
@@ -33,8 +34,7 @@ function fastCos(x) {
         return { stop() { cancelAnimationFrame(rafId); } };
     }
 
-    // Create animated decorations for left/right
-    const animHandles = [
+    const animHandles = [ // Create animated decorations for left/right
         createAnimatedDecoration(document.getElementById('left-decoration'), 'purple'),
         createAnimatedDecoration(document.getElementById('right-decoration'), 'orange')
     ];
@@ -43,8 +43,7 @@ function fastCos(x) {
     window.addEventListener('beforeunload', () => animHandles.forEach(h => h.stop()));
 })();
 
-// Simple scroll reveal effect
-function handleScrollReveal() {
+function handleScrollReveal() { // Simple scroll reveal effect
     const revDis = 50; // px before element enters viewport
     document.querySelectorAll('.reveal').forEach(rev => {
         const rect = rev.getBoundingClientRect();
