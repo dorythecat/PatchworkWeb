@@ -30,10 +30,8 @@ footer a { cursor: not-allowed; }
 #left-decoration,
 #right-decoration {
     position: fixed;
-    top: 0;
-    height: 100%;
+    bottom: 0;
     z-index: -1;
-    filter: blur(2px);
 }
 
 #left-decoration { left: 0; }
