@@ -1,5 +1,5 @@
-function fastCos(x) {
-    x = Math.abs(x) % (2 * Math.PI);
+function fastCos(x) { // Breaks for x < 0 because this way I saved one Math.abs() :3c
+    x %= 2 * Math.PI;
     if (2 * x > Math.PI) return -fastCos(x - Math.PI);
     const x2 = x * x / 2;
     return 1 - x2 * (1 - x2 / 6);
@@ -22,9 +22,10 @@ function fastCos(x) {
             const h = el.getBoundingClientRect().height;
             svg.setAttribute('viewBox', `0 0 100 ${h}`);
 
-            const s = 1 / 64; // Step size; smaller value means a smoother wave, but more CPU and memory usage
+            // Step size; smaller value means a smoother wave, but more CPU and memory usage
+            const s = 1 / 32;
             let d = `M 50 0`;
-            for (let i = s; i <= 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
+            for (let i = s; i < 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
             path.setAttribute('d', d);
 
             p += 1 / 16;
@@ -47,8 +48,8 @@ function fastCos(x) {
 function handleScrollReveal() { // Simple scroll reveal effect
     const revDis = 50; // px before element enters viewport
     document.querySelectorAll('.reveal').forEach(rev => {
-        const rect = rev.getBoundingClientRect();
-        rev.classList.toggle('visible', window.innerHeight - rect.top > revDis && rect.bottom > revDis);
+        const rec = rev.getBoundingClientRect();
+        rev.classList.toggle('visible', window.innerHeight - rec.top > revDis && rec.bottom > revDis);
     });
 }
 
