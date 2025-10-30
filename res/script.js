@@ -48,8 +48,7 @@ function handleScrollReveal() {
     const revDis = 50; // px before element enters viewport
     document.querySelectorAll('.reveal').forEach(rev => {
         const rect = rev.getBoundingClientRect();
-        if (window.innerHeight - rect.top > revDis && rect.bottom > revDis) rev.classList.add('visible');
-        else rev.classList.remove('visible');
+        rev.classList.toggle('visible', window.innerHeight - rect.top > revDis && rect.bottom > revDis);
     });
 }
 
