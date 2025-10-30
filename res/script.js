@@ -43,10 +43,6 @@ function fastCos(x) {
     window.addEventListener('beforeunload', () => animHandles.forEach(h => h.stop()));
 })();
 
-document.querySelectorAll('.showcase').forEach(el =>
-    [...el.children].forEach(child => child.classList.add('reveal', 'visible'))
-);
-
 // Simple scroll reveal effect
 function handleScrollReveal() {
     const revDis = 50; // px before element enters viewport
