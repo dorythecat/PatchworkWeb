@@ -1,10 +1,18 @@
 const stripe = Stripe('pk_test_51SEYoYDn7zRnsihsxizdby6oTeEaDjqQIUvFJGzsyUmnthmvIGy52tqMkP2mPjv46prUT5NWKHmCR0zRswOpD4kN00yOBEeKZV');
 const donationInput = document.getElementById('donateAmount');
 const currencyTypeInput = document.getElementById('currencyType');
+const supportedCurrencies = ['eur', 'usd', 'cad', 'aud', 'gbp'];
 let donationValue = 0;
 let setPrice = -1;
-let currencyType = 'eur';
 let elements = null;
+
+for (const curr of supportedCurrencies) {
+    const opt = document.createElement('option');
+    opt.value = curr;
+    opt.textContent = curr.toUpperCase();
+    opt.selected = curr === 'eur'; // Default to EUR
+    currencyTypeInput.appendChild(opt);
+}
 
 donationInput.addEventListener('input', initialize);
 currencyTypeInput.addEventListener('change', initialize);
@@ -14,11 +22,10 @@ document.getElementById('payment-form').addEventListener('submit', handleSubmit)
 (function initialize() {
     setLoading(true);
     donationInput.value = donationValue = parseInt(donationInput.value) || 10;
-    currencyType = currencyTypeInput.value || 'eur';
     fetch('/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ donationValue: donationValue * 10, currency: currencyType })
+        body: JSON.stringify({ donationValue: donationValue * 10, currency: currencyTypeInput.value })
     }).then(res => res.json()).catch(err => console.log(err)).then(data => {
         const clientSecret = data.clientSecret;
         const appearance = { theme: 'stripe' };
