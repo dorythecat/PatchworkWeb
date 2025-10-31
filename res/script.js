@@ -1,9 +1,15 @@
+const facMap = new Map();
 function cosTaylor(x, n = 2) {
     // Taylor series expansion for cos(x) around 0, of degree 2n
     const x2 = x * x;
-    let sum = 1, term = 1;
+    let sum = 1, fac = 1, term = 1;
     for (let i = 2; i <= 2 * n; i += 2) {
-        term *= -x2 / (i * (i - 1));
+        if (facMap.has(i)) fac = facMap.get(i);
+        else {
+            fac *= i * i - i;
+            facMap.set(i, i * i - i);
+        }
+        term *= -x2 / fac;
         sum += term;
     } return sum;
 }
