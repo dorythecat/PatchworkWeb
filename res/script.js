@@ -13,7 +13,7 @@ function cosTaylor(x, n = 2) {
 function fastCos(x, n = 2) {
     x %= 2 * Math.PI;
     if (2 * x > Math.PI) return -fastCos(x - Math.PI);
-    return cosTaylor(x,n);
+    return cosTaylor(x, n);
 }
 
 function createAnimatedDecoration(el, stroke) {
