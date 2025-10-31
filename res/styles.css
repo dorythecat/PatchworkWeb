@@ -349,6 +349,8 @@ input::-webkit-inner-spin-button {
         transform: none !important;
         will-change: none !important;
     }
+
+    * { transition: none !important }
 }
 
 @media (max-width: 600px) {
