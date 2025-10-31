@@ -1,12 +1,15 @@
-function cosTaylor(x, n = 2) { // Taylor series expansion for cos(x) around 0, of degree 2n
+function cosTaylor(x, n = 2) {
+    // Taylor series expansion for cos(x) around 0, of degree 2n
+    const x2 = x * x;
     let sum = 1, term = 1;
     for (let i = 2; i <= 2 * n; i += 2) {
-        term *= x * x / (i * (i - 1));
-        sum += ((i % 4 === 0) * 2 - 1) * term;
+        term *= -x2 / (i * (i - 1));
+        sum += term;
     } return sum;
 }
 
-function fastCos(x, n = 2) { // Breaks for x < 0 because this way I saved one Math.abs() :3c
+function fastCos(x, n = 2) {
+    // Breaks for x < 0 because this way I saved one Math.abs() :3c
     x %= 2 * Math.PI;
     if (2 * x > Math.PI) return -fastCos(x - Math.PI);
     // Could use 1 - x2 * (1 - x2 / 6) where x2 = x * x / 2, if you wanted to be a bit better
