@@ -6,13 +6,12 @@ let setPrice = -1;
 let currencyType = 'eur';
 let elements = null;
 
-initialize();
 donationInput.addEventListener('input', initialize);
 currencyTypeInput.addEventListener('change', initialize);
 document.getElementById('payment-form').addEventListener('submit', handleSubmit);
 
 // Fetches a payment intent and captures the client secret
-function initialize() {
+(function initialize() {
     setLoading(true);
     donationInput.value = donationValue = parseInt(donationInput.value) || 10;
     currencyType = currencyTypeInput.value || 'eur';
@@ -29,21 +28,21 @@ function initialize() {
         paymentElement.mount('#payment-element');
         setLoading(false);
     }).catch(err => console.log(err));
-}
+})()
 
-async function handleSubmit(e) {
+function handleSubmit(e) {
     if (setPrice !== donationValue) return;
     e.preventDefault();
     setLoading(true);
-    const { error } = await stripe.confirmPayment({
+    stripe.confirmPayment({
         elements,
         confirmParams: {
             // TODO: Change this to your payment completion page
             return_url: 'https://your-website.com/order/complete',
         },
-    });
-    showMessage(error.type in ['card_error', 'validation_error'] ? error.message : 'An unexpected error occurred.');
-    setLoading(false);
+    }).catch(e =>
+        showMessage(e.type in ['card_error', 'validation_error'] ? e.message : 'An unexpected error occurred.')
+    ).finally(() => setLoading(false));
 }
 
 // ------- UI helpers -------
