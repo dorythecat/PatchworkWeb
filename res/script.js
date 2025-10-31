@@ -12,7 +12,7 @@ function cosTaylor(x, n = 2) {
 
 function fastCos(x, n = 2) {
     x %= 2 * Math.PI;
-    if (2 * x > Math.PI) return -fastCos(x - Math.PI);
+    if (2 * x > Math.PI) return -fastCos(x - Math.PI, n);
     return cosTaylor(x, n);
 }
 
