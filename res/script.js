@@ -1,8 +1,17 @@
-function fastCos(x) { // Breaks for x < 0 because this way I saved one Math.abs() :3c
+function cosTaylor(x, n = 2) { // Taylor series expansion for cos(x) around 0, of degree 2n
+    let sum = 1, term = 1;
+    for (let i = 2; i <= 2 * n; i += 2) {
+        term *= x * x / (i * (i - 1));
+        sum += ((i % 4 === 0) * 2 - 1) * term;
+    } return sum;
+}
+
+function fastCos(x, n = 2) { // Breaks for x < 0 because this way I saved one Math.abs() :3c
     x %= 2 * Math.PI;
     if (2 * x > Math.PI) return -fastCos(x - Math.PI);
-    const x2 = x * x / 2;
-    return 1 - x2 * (1 - x2 / 6);
+    // Could use 1 - x2 * (1 - x2 / 6) where x2 = x * x / 2, if you wanted to be a bit better
+    // Tbh I just did this because I needed the hours, so don't blame me, blame the system :D
+    return cosTaylor(x, n);
 }
 
 (function initWaveOverlay() {
@@ -23,7 +32,7 @@ function fastCos(x) { // Breaks for x < 0 because this way I saved one Math.abs(
             svg.setAttribute('viewBox', `0 0 100 ${h}`);
 
             // Step size; smaller value means a smoother wave, but more CPU and memory usage
-            const s = 1 / 32;
+            const s = 1 / 256;
             let d = `M 50 0`;
             for (let i = s; i < 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
             path.setAttribute('d', d);
