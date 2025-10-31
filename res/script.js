@@ -46,7 +46,7 @@ function createAnimatedDecoration(el, stroke) {
     return { stop() { cancelAnimationFrame(rafId); } };
 }
 
-function handleScrollReveal() { // Simple scroll reveal effect
+function handleScrollReveal() {
     const revDis = 50; // px before element enters viewport
     document.querySelectorAll('.reveal').forEach(rev => {
         const rec = rev.getBoundingClientRect();
@@ -54,12 +54,11 @@ function handleScrollReveal() { // Simple scroll reveal effect
     });
 }
 
-const animHandles = [ // Create animated decorations for left/right
+const animHandles = [
     createAnimatedDecoration(document.getElementById('left-decoration'), 'purple'),
     createAnimatedDecoration(document.getElementById('right-decoration'), 'orange')
 ];
 
-// Stop animations on page unload
 window.addEventListener('beforeunload', () => animHandles.forEach(h => h.stop()));
 window.addEventListener('scroll', handleScrollReveal);
 window.addEventListener('load', handleScrollReveal);
