@@ -13,7 +13,7 @@ function cosTaylor(x, n = 2) {
 function fastCos(x, n = 2) {
     x %= 2 * Math.PI;
     if (2 * x > Math.PI) return -fastCos(x - Math.PI);
-    return cosTaylor(x, n);
+    return cosTaylor(x,n);
 }
 
 function createAnimatedDecoration(el, stroke) {
@@ -27,7 +27,7 @@ function createAnimatedDecoration(el, stroke) {
     svg.appendChild(path);
     el.appendChild(svg);
 
-    let p = Math.random() * 2 * Math.PI;
+    let p = Math.random();
     function draw() {
         const h = el.getBoundingClientRect().height;
         svg.setAttribute('viewBox', `0 0 100 ${h}`);
