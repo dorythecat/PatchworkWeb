@@ -33,7 +33,7 @@ function createAnimatedDecoration(el, stroke) {
         svg.setAttribute('viewBox', `0 0 100 ${h}`);
 
         // Step size; smaller value means a smoother wave, but more CPU and memory usage
-        const s = 1 / 256;
+        const s = 1 / 32;
         let d = `M 50 0`;
         for (let i = s; i < 1; i += s) d += `L ${50 + 50 * i * fastCos(9 * i + p)} ${i * h}`;
         path.setAttribute('d', d);
