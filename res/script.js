@@ -59,7 +59,7 @@ const animHandles = [ // Create animated decorations for left/right
     createAnimatedDecoration(document.getElementById('right-decoration'), 'orange')
 ];
 
-// Stop animations on unload to avoid dangling RAFs
+// Stop animations on page unload
 window.addEventListener('beforeunload', () => animHandles.forEach(h => h.stop()));
 window.addEventListener('scroll', handleScrollReveal);
 window.addEventListener('load', handleScrollReveal);
